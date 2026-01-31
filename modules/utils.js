@@ -5,7 +5,7 @@ class Utils {
         return `<span style="color:blue; font-size:32px">${greeting} ${now}</span>`;
     }
 
-    // C.1 写文件（追加）
+    // write file
     appendToFile(filePath, text, callback) {
         const fs = require('fs');
         fs.appendFile(filePath, text + '\n', (err) => {
@@ -13,7 +13,7 @@ class Utils {
         });
     }
 
-    // C.2 读文件
+    // read file
     readFileContent(filePath, callback) {
         const fs = require('fs');
         fs.readFile(filePath, 'utf8', (err, data) => {
