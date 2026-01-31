@@ -99,7 +99,7 @@ class Server {
             this.dispatcher(req, res, parsedUrl);
         });
         server.listen(this.port, () => {
-            console.log(`Server running at http://localhost:${this.port}/`);
+            console.log(`Server running on port ${this.port}`);
         });
     }
 }
