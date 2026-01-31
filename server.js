@@ -29,7 +29,7 @@ class Server {
             handler(req, res, parsedUrl);
         } else {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('Not Found');
+                res.end(lang.notFound);
         }
     }
 
@@ -37,7 +37,7 @@ class Server {
     handleGetDate(req, res, parsedUrl) {
         if (req.method !== 'GET') {
             res.writeHead(405, { 'Content-Type': 'text/plain' });
-            res.end('Method Not Allowed');
+                res.end(lang.methodNotAllowed);
             return;
         }
         const name = parsedUrl.query.name || 'Guest';
@@ -50,22 +50,22 @@ class Server {
     handleWriteFile(req, res, parsedUrl) {
         if (req.method !== 'GET') {
             res.writeHead(405, { 'Content-Type': 'text/plain' });
-            res.end('Method Not Allowed');
+                res.end(lang.methodNotAllowed);
             return;
         }
         const text = parsedUrl.query.text;
         if (!text) {
             res.writeHead(400, { 'Content-Type': 'text/plain' });
-            res.end('Missing text parameter');
+                res.end(lang.missingText);
             return;
         }
         this.utils.appendToFile('file.txt', text, (err) => {
             if (err) {
                 res.writeHead(500, { 'Content-Type': 'text/plain' });
-                res.end('Error writing to file');
+                    res.end(lang.errorWritingFile);
             } else {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
-                res.end('Text appended to file.txt');
+                    res.end(lang.textAppended);
             }
         });
     }
@@ -74,18 +74,18 @@ class Server {
     handleReadFile(req, res, fileName) {
         if (req.method !== 'GET') {
             res.writeHead(405, { 'Content-Type': 'text/plain' });
-            res.end('Method Not Allowed');
+                res.end(lang.methodNotAllowed);
             return;
         }
         if (!fileName) {
             res.writeHead(400, { 'Content-Type': 'text/plain' });
-            res.end('Missing file name');
+                res.end(lang.missingFileName);
             return;
         }
         this.utils.readFileContent(fileName, (err, data) => {
             if (err) {
                 res.writeHead(404, { 'Content-Type': 'text/plain' });
-                res.end(`File not found: ${fileName}`);
+                    res.end(lang.fileNotFound.replace('%1', fileName));
             } else {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end(data);
