@@ -9,16 +9,16 @@ class Server {
         this.utils = new Utils();
         // routers mapping
         this.routes = {
-            '/getDate': this.handleGetDate.bind(this),
-            '/writeFile': this.handleWriteFile.bind(this)
+            '/COMP4537/labs/3/getDate': this.handleGetDate.bind(this),
+            '/COMP4537/labs/3/writeFile': this.handleWriteFile.bind(this)
         };
     }
 
     // request dispatcher
     dispatcher(req, res, parsedUrl) {
         // handle dynamic route for readFile (/readFile/xxx)
-        if (parsedUrl.pathname.startsWith('/readFile/') && req.method === 'GET') {
-            const fileName = parsedUrl.pathname.replace('/readFile/', '');
+        if (parsedUrl.pathname.startsWith('/COMP4537/labs/3/readFile/') && req.method === 'GET') {
+            const fileName = parsedUrl.pathname.replace('/COMP4537/labs/3/readFile/', '');
             this.handleReadFile(req, res, fileName);
             return;
         }
